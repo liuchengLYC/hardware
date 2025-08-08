@@ -71,7 +71,7 @@ size_t encode(rmt_encoder_t* encoder, rmt_channel_handle_t channel, const void* 
             }
             if(session_state & RMT_ENCODING_MEM_FULL) {
                 state |= RMT_ENCODING_MEM_FULL;
-                goto out;
+                break;
             }
         // fall-through
         case 1:  // send reset code
@@ -83,10 +83,8 @@ size_t encode(rmt_encoder_t* encoder, rmt_channel_handle_t channel, const void* 
             }
             if(session_state & RMT_ENCODING_MEM_FULL) {
                 state |= RMT_ENCODING_MEM_FULL;
-                goto out;
             }
     }
-out:
     *ret_state = state;
     return encoded_symbols;
 }
